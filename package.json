@@ -1,0 +1,26 @@
+{
+  "name": "gmail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CordeiroM17/gmail-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CordeiroM17/gmail-2/issues"
+  },
+  "homepage": "https://github.com/CordeiroM17/gmail-2#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.11",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
