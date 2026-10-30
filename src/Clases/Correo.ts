@@ -1,18 +1,20 @@
+import { Contacto } from "./Contacto";
+
 export class Correo {
   private _id: string;
   private _asunto: string;
   private _contenido: string;
-  private _remitente: string; /* TIENE QUE SER DE TIPO CONTACTO */
+  private _remitente: Contacto;
 
-  private _destinatario: string; /* TIENE QUE SER UNA COLLECION DE CONTACTO */
-  private _destinarariosCC: string[]; /* TIENE QUE SER UNA COLLECION DE CONTACTO */
-  private _destinarariosCCO: string[]; /* TIENE QUE SER UNA COLLECION DE CONTACTO */
+  private _destinatario: Contacto;
+  private _destinarariosCC: Contacto[];
+  private _destinarariosCCO: Contacto[];
 
   private _leido: boolean;
   private _favorito: boolean;
 
-  private _fechaEnvio: string; /* Date */
-  private _fechaCreacion: string; /* Date */
+  private _fechaEnvio: Date; /* Date */
+  private _fechaCreacion: Date; /* Date */
 
   constructor() {}
 
@@ -41,35 +43,35 @@ export class Correo {
     this._contenido = contenido;
   }
 
-  getRemitente(): string {
+  getRemitente(): Contacto {
     return this._remitente;
   }
 
-  protected setRemitente(remitente: string): void {
+  protected setRemitente(remitente: Contacto): void {
     this._remitente = remitente;
   }
 
-  getDestinatario(): string {
+  getDestinatario(): Contacto {
     return this._destinatario;
   }
 
-  protected setDestinatario(destinatario: string): void {
+  protected setDestinatario(destinatario: Contacto): void {
     this._destinatario = destinatario;
   }
 
-  getDestinatariosCC(): string[] {
+  getDestinatariosCC(): Contacto[] {
     return this._destinarariosCC;
   }
 
-  protected setDestinatariosCC(destinatariosCC: string[]): void {
+  protected setDestinatariosCC(destinatariosCC: Contacto[]): void {
     this._destinarariosCC = destinatariosCC;
   }
 
-  getDestinatariosCCO(): string[] {
+  getDestinatariosCCO(): Contacto[] {
     return this._destinarariosCCO;
   }
 
-  protected setDestinatariosCCO(destinatariosCCO: string[]): void {
+  protected setDestinatariosCCO(destinatariosCCO: Contacto[]): void {
     this._destinarariosCCO = destinatariosCCO;
   }
 
@@ -89,19 +91,19 @@ export class Correo {
     this._favorito = favorito;
   }
 
-  getFechaEnvio(): string {
+  getFechaEnvio(): Date {
     return this._fechaEnvio;
   }
 
-  protected setFechaEnvio(fechaEnvio: string): void {
+  protected setFechaEnvio(fechaEnvio: Date): void {
     this._fechaEnvio = fechaEnvio;
   }
 
-  getFechaCreacion(): string {
+  getFechaCreacion(): Date {
     return this._fechaCreacion;
   }
 
-  protected setFechaCreacion(fechaCreacion: string): void {
+  protected setFechaCreacion(fechaCreacion: Date): void {
     this._fechaCreacion = fechaCreacion;
   }
 }
