@@ -6,15 +6,15 @@ describe("RQ-1", () => {
   test("Se podrán crear múltiples correos con diferentes remitentes y destinatarios.", () => {
     const ana = new Contacto();
     ana.setNombre("Ana");
-    ana.setEmail("ana@mail.com");
+    ana.setEmail("ana@gmail.com");
 
     const luis = new Contacto();
     luis.setNombre("Luis");
-    luis.setEmail("luis@mail.com");
+    luis.setEmail("luis@gmail.com");
 
     const marta = new Contacto();
     marta.setNombre("Marta");
-    marta.setEmail("marta@mail.com");
+    marta.setEmail("marta@gmail.com");
 
     const correo1 = new Correo();
     correo1.setAsunto("Parcial");
@@ -55,7 +55,61 @@ describe("RQ-1", () => {
 
   test("Se deberán validar los datos obligatorios cuando corresponda.", () => {});
 
-  test("Se deberá demostrar que los objetos creados mantienen correctamente su información.", () => {});
+  test("Se deberá demostrar que los objetos creados mantienen correctamente su información.", () => {
+    const ana = new Contacto();
+    ana.setNombre("Ana");
+    ana.setEmail("ana@gmail.com");
+
+    const luis = new Contacto();
+    luis.setNombre("Luis");
+    luis.setEmail("luis@gmail.com");
+
+    const marta = new Contacto();
+    marta.setNombre("Marta");
+    marta.setEmail("marta@gmail.com");
+
+    const fechaEnvio = new Date("2026-10-31T10:00:00Z");
+
+    const correo = new Correo();
+    correo.setAsunto("Reunión");
+    correo.setContenido("Nos vemos mañana");
+    correo.setRemitente(ana);
+    correo.setDestinatarios([luis, marta]);
+    correo.setDestinatariosCC([ana]);
+    correo.setDestinatariosCCO([marta]);
+    correo.setLeido(true);
+    correo.setFavorito(true);
+    correo.setFechaEnvio(fechaEnvio);
+
+    // Contacto mantiene su información
+    expect(ana.getNombre()).toBe("Ana");
+    expect(ana.getEmail()).toBe("ana@gmail.com");
+
+    // Correo mantiene su información
+    expect(correo.getAsunto()).toBe("Reunión");
+    expect(correo.getContenido()).toBe("Nos vemos mañana");
+    expect(correo.getRemitente()).toBe(ana);
+    expect(correo.getDestinatarios()).toEqual([luis, marta]);
+    expect(correo.getDestinatariosCC()).toEqual([ana]);
+    expect(correo.getDestinatariosCCO()).toEqual([marta]);
+    expect(correo.getLeido()).toBe(true);
+    expect(correo.getFavorito()).toBe(true);
+    expect(correo.getFechaEnvio()).toEqual(fechaEnvio);
+    expect(correo.getFechaCreacion()).toBeInstanceOf(Date);
+
+    // Los valores se pueden leer varias veces y siguen iguales
+    expect(correo.getAsunto()).toBe("Reunión");
+    expect(correo.getDestinatarios()).toEqual([luis, marta]);
+
+    // Un correo nuevo arranca con valores por defecto
+    const vacio = new Correo();
+    expect(vacio.getAsunto()).toBe("");
+    expect(vacio.getContenido()).toBe("");
+    expect(vacio.getDestinatarios()).toEqual([]);
+    expect(vacio.getLeido()).toBe(false);
+    expect(vacio.getFavorito()).toBe(false);
+    expect(vacio.getFechaEnvio()).toBeNull();
+  });
 
   test("Las colecciones de destinatarios no deberán exponer modificaciones que comprometan las reglas del dominio", () => {});
 });
