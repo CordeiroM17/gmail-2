@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { Contacto } from "./Contacto";
 
 export class Correo {
@@ -6,24 +7,40 @@ export class Correo {
   private _contenido: string;
   private _remitente: Contacto;
 
-  private _destinatario: Contacto;
+  private _destinatarios: Contacto[];
   private _destinarariosCC: Contacto[];
   private _destinarariosCCO: Contacto[];
 
   private _leido: boolean;
   private _favorito: boolean;
 
-  private _fechaEnvio: Date; /* Date */
+  private _fechaEnvio: Date | null; /* Date */
   private _fechaCreacion: Date; /* Date */
 
-  constructor() {}
+  constructor() {
+    this.setId(randomUUID());
+    this._fechaCreacion = new Date();
+
+    this.setAsunto("");
+    this.setContenido("");
+    this.setRemitente(new Contacto());
+
+    this.setDestinatarios([]);
+    this.setDestinatariosCC([]);
+    this.setDestinatariosCCO([]);
+
+    this.setLeido(false);
+    this.setFavorito(false);
+
+    this.setFechaEnvio(null);
+  }
 
   /* Get y Set */
   getId(): string {
     return this._id;
   }
 
-  protected setId(id: string): void {
+  setId(id: string): void {
     this._id = id;
   }
 
@@ -31,7 +48,7 @@ export class Correo {
     return this._asunto;
   }
 
-  protected setAsunto(asunto: string): void {
+  setAsunto(asunto: string): void {
     this._asunto = asunto;
   }
 
@@ -39,7 +56,7 @@ export class Correo {
     return this._contenido;
   }
 
-  protected setContenido(contenido: string): void {
+  setContenido(contenido: string): void {
     this._contenido = contenido;
   }
 
@@ -47,23 +64,23 @@ export class Correo {
     return this._remitente;
   }
 
-  protected setRemitente(remitente: Contacto): void {
+  setRemitente(remitente: Contacto): void {
     this._remitente = remitente;
   }
 
-  getDestinatario(): Contacto {
-    return this._destinatario;
+  getDestinatarios(): Contacto[] {
+    return this._destinatarios;
   }
 
-  protected setDestinatario(destinatario: Contacto): void {
-    this._destinatario = destinatario;
+  setDestinatarios(destinatarios: Contacto[]): void {
+    this._destinatarios = destinatarios;
   }
 
   getDestinatariosCC(): Contacto[] {
     return this._destinarariosCC;
   }
 
-  protected setDestinatariosCC(destinatariosCC: Contacto[]): void {
+  setDestinatariosCC(destinatariosCC: Contacto[]): void {
     this._destinarariosCC = destinatariosCC;
   }
 
@@ -71,7 +88,7 @@ export class Correo {
     return this._destinarariosCCO;
   }
 
-  protected setDestinatariosCCO(destinatariosCCO: Contacto[]): void {
+  setDestinatariosCCO(destinatariosCCO: Contacto[]): void {
     this._destinarariosCCO = destinatariosCCO;
   }
 
@@ -79,7 +96,7 @@ export class Correo {
     return this._leido;
   }
 
-  protected setLeido(leido: boolean): void {
+  setLeido(leido: boolean): void {
     this._leido = leido;
   }
 
@@ -87,15 +104,15 @@ export class Correo {
     return this._favorito;
   }
 
-  protected setFavorito(favorito: boolean): void {
+  setFavorito(favorito: boolean): void {
     this._favorito = favorito;
   }
 
-  getFechaEnvio(): Date {
+  getFechaEnvio(): Date | null {
     return this._fechaEnvio;
   }
 
-  protected setFechaEnvio(fechaEnvio: Date): void {
+  setFechaEnvio(fechaEnvio: Date | null): void {
     this._fechaEnvio = fechaEnvio;
   }
 
@@ -103,7 +120,7 @@ export class Correo {
     return this._fechaCreacion;
   }
 
-  protected setFechaCreacion(fechaCreacion: Date): void {
+  setFechaCreacion(fechaCreacion: Date): void {
     this._fechaCreacion = fechaCreacion;
   }
 }
