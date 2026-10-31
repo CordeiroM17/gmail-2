@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { Contacto } from "../Clases/Contacto";
-import { Correo } from "../Clases/Correo";
+import { Contacto } from "../src/Clases/Contacto";
+import { Correo } from "../src/Clases/Correo";
 
 describe("RQ-1", () => {
   test("Se podrán crear múltiples correos con diferentes remitentes y destinatarios.", () => {
