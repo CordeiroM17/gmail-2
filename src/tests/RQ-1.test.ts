@@ -111,5 +111,29 @@ describe("RQ-1", () => {
     expect(vacio.getFechaEnvio()).toBeNull();
   });
 
-  test("Las colecciones de destinatarios no deberán exponer modificaciones que comprometan las reglas del dominio", () => {});
+  test("Las colecciones de destinatarios no deberán exponer modificaciones que comprometan las reglas del dominio", () => {
+    const ana = new Contacto();
+    ana.setNombre("Ana");
+    ana.setEmail("ana@gmail.com");
+
+    const luis = new Contacto();
+    luis.setNombre("Luis");
+    luis.setEmail("luis@gmail.com");
+
+    const marta = new Contacto();
+    marta.setNombre("Marta");
+    marta.setEmail("marta@gmail.com");
+
+    const lista = [luis];
+    const correo = new Correo();
+    correo.setDestinatarios(lista);
+
+    // Modifico el array que le pasé
+    lista.push(marta);
+    expect(correo.getDestinatarios()).toEqual([luis]);
+
+    // Modifico el array que me devolvió
+    correo.getDestinatarios().push(marta);
+    expect(correo.getDestinatarios()).toEqual([luis]);
+  });
 });

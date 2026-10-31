@@ -69,11 +69,11 @@ export class Correo {
   }
 
   getDestinatarios(): Contacto[] {
-    return this._destinatarios;
+    return [...this._destinatarios];
   }
 
   setDestinatarios(destinatarios: Contacto[]): void {
-    this._destinatarios = destinatarios;
+    this._destinatarios = [...destinatarios];
   }
 
   getDestinatariosCC(): Contacto[] {
