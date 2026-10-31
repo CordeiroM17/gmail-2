@@ -18,20 +18,20 @@ export class Correo {
   private _fechaCreacion: Date; /* Date */
 
   constructor() {
-    this.setId(randomUUID());
+    this._id = randomUUID();
     this._fechaCreacion = new Date();
 
-    this.setAsunto("");
-    this.setContenido("");
-    this.setRemitente(new Contacto());
+    // Obligatorios: directo, porque el set no acepta vacío
+    this._asunto = "";
+    this._contenido = "";
+    this._remitente = new Contacto();
+    this._destinatarios = [];
 
-    this.setDestinatarios([]);
+    // El resto puede seguir usando su set
     this.setDestinatariosCC([]);
     this.setDestinatariosCCO([]);
-
     this.setLeido(false);
     this.setFavorito(false);
-
     this.setFechaEnvio(null);
   }
 
@@ -49,6 +49,7 @@ export class Correo {
   }
 
   setAsunto(asunto: string): void {
+    this.validarCampoObligatorio(asunto, "El asunto");
     this._asunto = asunto;
   }
 
@@ -57,6 +58,7 @@ export class Correo {
   }
 
   setContenido(contenido: string): void {
+    this.validarCampoObligatorio(contenido, "El contenido");
     this._contenido = contenido;
   }
 
@@ -65,6 +67,7 @@ export class Correo {
   }
 
   setRemitente(remitente: Contacto): void {
+    this.validarCampoObligatorio(remitente, "El remitente");
     this._remitente = remitente;
   }
 
@@ -73,6 +76,7 @@ export class Correo {
   }
 
   setDestinatarios(destinatarios: Contacto[]): void {
+    this.validarCampoObligatorio(destinatarios, "Los destinatarios");
     this._destinatarios = [...destinatarios];
   }
 
@@ -122,5 +126,17 @@ export class Correo {
 
   setFechaCreacion(fechaCreacion: Date): void {
     this._fechaCreacion = fechaCreacion;
+  }
+
+  private validarCampoObligatorio(valor: unknown, nombreCampo: string): void {
+    if (valor === null || valor === undefined) {
+      throw new Error(`${nombreCampo} es obligatorio`);
+    }
+    if (typeof valor === "string" && valor.trim() === "") {
+      throw new Error(`${nombreCampo} es obligatorio`);
+    }
+    if (Array.isArray(valor) && valor.length === 0) {
+      throw new Error(`${nombreCampo} es obligatorio`);
+    }
   }
 }

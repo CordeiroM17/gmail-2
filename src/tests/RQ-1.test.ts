@@ -53,7 +53,14 @@ describe("RQ-1", () => {
     expect(correo1.getId()).toBe(idOriginal);
   });
 
-  test("Se deberán validar los datos obligatorios cuando corresponda.", () => {});
+  test("Se deberán validar los datos obligatorios cuando corresponda.", () => {
+    const correo = new Correo();
+
+    expect(() => correo.setAsunto("")).toThrow();
+    expect(() => correo.setContenido("")).toThrow();
+    expect(() => correo.setRemitente(null as any)).toThrow();
+    expect(() => correo.setDestinatarios([])).toThrow();
+  });
 
   test("Se deberá demostrar que los objetos creados mantienen correctamente su información.", () => {
     const ana = new Contacto();

@@ -3,8 +3,8 @@ export class Contacto {
   private _nombre: string;
 
   constructor() {
-    this.setEmail("");
-    this.setNombre("");
+    this._nombre = "";
+    this._email = "";
   }
 
   getEmail(): string {
