@@ -38,7 +38,20 @@ describe("RQ-1", () => {
     expect(correo1.getDestinatarios()).not.toEqual(correo2.getDestinatarios());
   });
 
-  test("Cada correo tendrá una identidad que permita distinguirlo de los demás.", () => {});
+  test("Cada correo tendrá una identidad que permita distinguirlo de los demás.", () => {
+    const correo1 = new Correo();
+    const correo2 = new Correo();
+
+    expect(correo1.getId()).toBeTruthy();
+    expect(correo2.getId()).toBeTruthy();
+    expect(correo1.getId()).not.toBe(correo2.getId());
+
+    // El id no cambia al modificar el correo
+    const idOriginal = correo1.getId();
+    correo1.setAsunto("Nuevo asunto");
+    correo1.setLeido(true);
+    expect(correo1.getId()).toBe(idOriginal);
+  });
 
   test("Se deberán validar los datos obligatorios cuando corresponda.", () => {});
 
