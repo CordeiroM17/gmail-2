@@ -54,4 +54,12 @@ export class ClienteCorreo {
       throw new Error(`${nombreCampo} es obligatorio`);
     }
   }
+
+  public buscar(texto: string): Correo[] {
+    const correos = [
+      ...this.getEnviados().getCorreos(),
+      ...this.getBorradores().getCorreos(),
+    ];
+    return correos.filter((correo) => correo.contieneTexto(texto));
+  }
 }

@@ -139,4 +139,22 @@ export class Correo {
       throw new Error(`${nombreCampo} es obligatorio`);
     }
   }
+
+  public contieneTexto(texto: string): boolean {
+    const buscado = texto.trim().toLowerCase();
+    if (buscado === "") return false;
+
+    const remitente = this.getRemitente();
+    const campos = [
+      this.getAsunto(),
+      this.getContenido(),
+      remitente?.getNombre() ?? "",
+      remitente?.getEmail() ?? "",
+    ];
+    for (const destinatario of this.getDestinatarios()) {
+      campos.push(destinatario.getNombre(), destinatario.getEmail());
+    }
+
+    return campos.some((campo) => campo.toLowerCase().includes(buscado));
+  }
 }
