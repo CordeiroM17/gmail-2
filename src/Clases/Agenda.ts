@@ -1,7 +1,7 @@
 import { Contacto } from "./Contacto";
 
 export class Agenda {
-  private contactos: Contacto[] = [];
+  private _contactos: Contacto[] = [];
 
   // Alta
   public agregarContacto(contacto: Contacto): void {
@@ -11,17 +11,17 @@ export class Agenda {
     if (this.buscarPorEmail(contacto.getEmail())) {
       throw new Error("Ya existe un contacto con ese email");
     }
-    this.contactos.push(contacto);
+    this._contactos.push(contacto);
   }
 
   // Consulta
   public getContactos(): Contacto[] {
-    return [...this.contactos];
+    return [...this._contactos];
   }
 
   public buscarPorEmail(email: string): Contacto | null {
     const buscado = email.toLowerCase();
-    const encontrado = this.contactos.find(
+    const encontrado = this._contactos.find(
       (contacto) => contacto.getEmail().toLowerCase() === buscado,
     );
     return encontrado ?? null;
@@ -50,6 +50,6 @@ export class Agenda {
     if (!contacto) {
       throw new Error("No existe un contacto con ese email");
     }
-    this.contactos = this.contactos.filter((c) => c !== contacto);
+    this._contactos = this._contactos.filter((c) => c !== contacto);
   }
 }
