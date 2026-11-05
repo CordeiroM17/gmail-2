@@ -28,7 +28,11 @@ export class Agenda {
   }
 
   // Modificación
-  public modificarContacto(email: string, nuevoNombre: string, nuevoEmail: string): void {
+  public modificarContacto(
+    email: string,
+    nuevoNombre: string,
+    nuevoEmail: string,
+  ): void {
     const contacto = this.buscarPorEmail(email);
     if (!contacto) {
       throw new Error("No existe un contacto con ese email");
